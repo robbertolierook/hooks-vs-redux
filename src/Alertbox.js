@@ -9,7 +9,6 @@ export default class extends Component {
   // };
 
   render() {
-    console.log(this.props);
     const { text, alertType } = this.props;
     return (
       <div
@@ -17,7 +16,8 @@ export default class extends Component {
           width: "28%",
           border: "1px solid black",
           margin: 20,
-          display: "inline-block"
+          display: "inline-block",
+          padding: "0 0 20px 0"
         }}
       >
         <Alert
