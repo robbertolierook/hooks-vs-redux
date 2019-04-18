@@ -35,7 +35,11 @@ export default class extends Component {
         </Alert>
         <Button
           tertiary={alertType === "success" ? false : true}
-          onClick={this.props.setFavorite.bind(null, this.props.id)}
+          onClick={this.props.toggleFavorite.bind(
+            null,
+            this.props.id,
+            this.props.alertType
+          )}
           small
         >
           {alertType === "success" ? "Unset as favorite" : "Set as favorite"}

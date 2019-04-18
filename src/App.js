@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "@olierook/global-react-components";
 import Alertbox from "./Alertbox";
-import { addAlert, setFavorite } from "./actions/actionCreators";
+import { addAlert, toggleFavorite } from "./actions/actionCreators";
 
 class App extends Component {
   addAlert = e => {
@@ -13,7 +13,12 @@ class App extends Component {
   };
 
   renderAlerts = (alert, i) => (
-    <Alertbox {...alert} setFavorite={this.props.setFavorite} key={i} id={i} />
+    <Alertbox
+      {...alert}
+      toggleFavorite={this.props.toggleFavorite}
+      key={i}
+      id={i}
+    />
   );
 
   render() {
@@ -42,7 +47,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addAlert: text => dispatch(addAlert(text)),
-  setFavorite: key => dispatch(setFavorite(key))
+  toggleFavorite: (key, alertType) => dispatch(toggleFavorite(key, alertType))
 });
 
 export default connect(

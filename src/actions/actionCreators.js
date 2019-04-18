@@ -5,9 +5,16 @@ export const addAlert = text => dispatch => {
   });
 };
 
-export const setFavorite = key => dispatch => {
-  dispatch({
+export const toggleFavorite = (key, alertType) => dispatch => {
+  let dispObj = {
     type: "SET_FAVORITE",
     key
-  });
+  };
+  if (alertType === "success") {
+    dispObj = {
+      type: "UNSET_FAVORITE",
+      key
+    };
+  }
+  dispatch(dispObj);
 };
