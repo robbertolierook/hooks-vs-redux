@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import { Alert, Button } from "@olierook/global-react-components";
 
 export default class extends Component {
-  // setFavorite = () => {
-  //   // setFavorite(this.props.id);
-  //   // console.log(this.props.setFavorite(this.props.id));
-  //   console.log(this.props.setFavorite);
-  // };
-
+  
   render() {
     const { text, alertType } = this.props;
     return (
