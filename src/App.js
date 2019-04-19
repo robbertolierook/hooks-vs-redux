@@ -1,56 +1,38 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { Button } from "@olierook/global-react-components";
 import Alertbox from "./Alertbox";
-import { addAlert, toggleFavorite } from "./actions/actionCreators";
+import { addAlert } from "./actions/actionCreators";
+import { useStateValue } from "./state";
 
-class App extends Component {
-  addAlert = e => {
+const App = props => {
+  const [{ alerts }, dispatch] = useStateValue();
+  const alertForm = React.useRef(null);
+  const alertText = React.useRef(null);
+  const handleSubmit = e => {
     e.preventDefault();
-    const text = this.refs.text.value;
-    this.props.addAlert(text);
-    this.refs.alertForm.reset();
+    const text = alertText.current.value;
+    addAlert(text)(dispatch);
+    alertForm.current.reset();
   };
 
-  renderAlerts = (alert, i) => (
-    <Alertbox
-      {...alert}
-      toggleFavorite={this.props.toggleFavorite}
-      key={i}
-      id={i}
-    />
+  const renderAlerts = (alert, i) => <Alertbox {...alert} key={i} id={i} />;
+
+  return (
+    <>
+      <form ref={alertForm} onSubmit={handleSubmit}>
+        <Button type="submit" secondary>
+          Add an alert
+        </Button>
+        <input
+          style={{ margin: 20, height: 50 }}
+          type="text"
+          ref={alertText}
+          placeholder="Write an alert"
+        />
+      </form>
+      {alerts.map(renderAlerts)}
+    </>
   );
+};
 
-  render() {
-    return (
-      <>
-        <form ref="alertForm" onSubmit={this.addAlert}>
-          <Button type="submit" secondary>
-            Add an alert
-          </Button>
-          <input
-            style={{ margin: 20, height: 50 }}
-            type="text"
-            ref="text"
-            placeholder="Write an alert"
-          />
-        </form>
-        {this.props.alerts.map(this.renderAlerts)}
-      </>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  ...state
-});
-
-const mapDispatchToProps = dispatch => ({
-  addAlert: text => dispatch(addAlert(text)),
-  toggleFavorite: (key, alertType) => dispatch(toggleFavorite(key, alertType))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;
