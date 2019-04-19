@@ -5,19 +5,6 @@ import { toggleFavorite } from "./actions/actionCreators";
 
 const Alertbox = ({ text, alertType, id }) => {
   const [, dispatch] = useStateValue();
-  // const handeClick = e => {
-  //   let dispObj = {
-  //     type: "SET_FAVORITE",
-  //     key: id
-  //   };
-  //   if (alertType === "success") {
-  //     dispObj = {
-  //       type: "UNSET_FAVORITE",
-  //       key: id
-  //     };
-  //   }
-  //   dispatch(dispObj);
-  // };
   const handeClick = e => {
     return toggleFavorite(id, alertType)(dispatch);
   };
