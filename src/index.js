@@ -3,12 +3,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { StateProvider } from "./state";
-import reducer from "./reducers";
-
-const initialState = { alerts: [] };
 
 ReactDOM.render(
-  <StateProvider initialState={initialState} reducer={reducer}>
+  <StateProvider>
     <App />
   </StateProvider>,
   document.getElementById("root")

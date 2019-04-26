@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useReducer } from "react";
 import PropTypes from "prop-types";
+import reducer from "./reducers";
+
+const initialState = { alerts: [] };
 
 export const GlobalState = createContext();
 
-export const StateProvider = ({ reducer, initialState, children }) => (
+export const StateProvider = ({ children }) => (
   <GlobalState.Provider value={useReducer(reducer, initialState)}>
     {children}
   </GlobalState.Provider>
